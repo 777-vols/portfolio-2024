@@ -1,0 +1,11 @@
+{
+  "navbar": {
+    "title": "Портфолио",
+    "linksNames": {
+      "home": "Главная",
+      "about": "Обо мне",
+      "projects": "Проекты",
+      "contacts": "Контакты"
+    }
+  }
+}

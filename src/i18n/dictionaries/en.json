@@ -1,0 +1,11 @@
+{
+  "navbar": {
+    "title": "Portfolio",
+    "linksNames": {
+      "home": "Home",
+      "about": "About me",
+      "projects": "Projects",
+      "contacts": "Contacts"
+    }
+  }
+}

@@ -19,9 +19,21 @@
       }
     ],
     "paths": {
+      "public/*": ["./public/*"],
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "jest",
+    ".eslintrc.cjs",
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.cjs",
+    "**/*.mjs",
+    ".next/types/**/*.ts",
+    "next.config.mjs",
+    "jest.config.js"
+  ],
   "exclude": ["node_modules"]
 }
