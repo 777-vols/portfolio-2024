@@ -24,3 +24,8 @@ export const getLinks = (locale: Locale, linksNames: DictionaryType['navbar']['l
     },
   ];
 };
+
+export const isActivePath = (pathName: string, path: string) => {
+  const localeRegExp = /ru(\/)?|en(\/)?/;
+  return pathName.replace(localeRegExp, '') === path.replace(localeRegExp, '');
+};
