@@ -8,15 +8,3 @@ body {
   min-height: 100vh;
   /* background: radial-gradient(circle at 50% -15%, rgb(114, 106, 219) 0%, rgb(0, 0, 0) 100%); */
 }
-
-/* html,
-body {
-  overflow: hidden;
-}
-canvas {
-  position: absolute;
-  z-index: -1;
-}
-body > div {
-  background: rgba(255, 255, 255, 0.8);
-} */

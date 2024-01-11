@@ -1,28 +1,23 @@
 'use client';
 
 import { LayoutFooter, LayoutNavbar } from '@/app/[locale]/_components';
+import { TransitionEffect } from '@/components';
 import { useBubblesTrail } from '@/hooks';
 
-import { About, Contacts, Hero, Projects } from './_components';
-
-const Portfolio = ({ params: { locale } }: ILocaleParams) => {
+const About = ({ params: { locale } }: ILocaleParams) => {
   useBubblesTrail();
 
   return (
     <>
+      <TransitionEffect />
       <LayoutNavbar locale={locale} />
       <main>
         <canvas className="fixed w-full h-full top-0 left-0 -z-10" />
-        <div className="container flex min-h-screen flex-col">
-          <Hero />
-          <About />
-          <Projects />
-          <Contacts />
-        </div>
+        <div className="container flex min-h-screen flex-col">About page</div>
       </main>
       <LayoutFooter locale={locale} />
     </>
   );
 };
 
-export default Portfolio;
+export default About;

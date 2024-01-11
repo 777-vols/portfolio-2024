@@ -1,7 +1,7 @@
 export const urls = {
-  home: '/',
-  portfolio: '/portfolio',
+  preview: '/',
+  home: '/home',
   about: '/about',
   projects: '/projects',
-  contacts: '/contact',
+  contacts: '/contacts',
 } as const;

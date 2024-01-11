@@ -6,9 +6,9 @@ import Link from 'next/link';
 import { urls } from '@/constants';
 import { usePreviewFoggyTrail } from '@/hooks';
 
-const { portfolio } = urls;
+const { home } = urls;
 
-const Home = ({ params: { locale } }: ILocaleParams) => {
+const Preview = ({ params: { locale } }: ILocaleParams) => {
   usePreviewFoggyTrail();
   return (
     <main className="w-full h-dvh flex flex-col justify-center items-center">
@@ -20,7 +20,7 @@ const Home = ({ params: { locale } }: ILocaleParams) => {
         Move your mouse or swipe
       </motion.h1>
       <Link
-        href={`/${locale}${portfolio}`}
+        href={`/${locale}${home}`}
         className="absolute top-96 text-white hover:text-red-500 duration-150 tracking-wider text-3xl font-medium mix-blend-color-dodge max-sm:text-xl">
         Click to view portfolio
       </Link>
@@ -32,4 +32,4 @@ const Home = ({ params: { locale } }: ILocaleParams) => {
   );
 };
 
-export default Home;
+export default Preview;

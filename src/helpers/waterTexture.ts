@@ -32,7 +32,7 @@ export class WaterTexture {
     this.width = window.innerWidth;
     this.height = window.innerHeight;
     this.maxAge = 65;
-    this.radius = 30;
+    this.radius = 10;
     this.points = [];
     this.last = null;
 
