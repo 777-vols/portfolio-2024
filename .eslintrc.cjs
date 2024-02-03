@@ -53,6 +53,7 @@ module.exports = {
     '@typescript-eslint/ban-ts-comment': 0,
     'no-param-reassign': 0,
     'no-bitwise': 0,
+    'jsx-a11y/label-has-associated-control': 'off',
     '@typescript-eslint/no-misused-promises': [
       'error',
       {

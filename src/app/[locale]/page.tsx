@@ -25,7 +25,7 @@ const Preview = ({ params: { locale } }: ILocaleParams) => {
         Click to view portfolio
       </Link>
       <span className="absolute bottom-0 text-xs pointer-events-none p-4">
-        Copyright © 2024 Portfolio
+        2024 © All Rights Reserved
       </span>
       <canvas className="h-full w-full" />
     </main>

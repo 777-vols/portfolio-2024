@@ -34,7 +34,7 @@ const NavMenu = ({ locale }: ILocaleProps) => {
 
   return (
     <nav className="flex items-center">
-      <ul className="flex items-center gap-5">{links}</ul>
+      <ul className="flex items-center gap-6">{links}</ul>
     </nav>
   );
 };
