@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useMemo } from 'react';
 
 import { getLinks } from '@/helpers';
@@ -11,19 +12,29 @@ const NavMenu = ({ locale }: ILocaleProps) => {
   const { navbar } = getDictionary(locale);
   const { linksNames } = navbar;
 
+  const pathname = usePathname();
+
   const links = useMemo(
     () =>
       getLinks(locale, linksNames).map(({ name, path }) => (
         <li key={path}>
-          <Link href={path}>{name}</Link>
+          <Link href={path} className="font-poppins relative group">
+            {name}
+            <span
+              className={`h-[2px] inline-block bg-white absolute left-0 -bottom-0.5 group-hover:w-full transition-[width] ease duration-300 ${
+                pathname === path ? 'w-full' : 'w-0'
+              }`}>
+              &nbsp;
+            </span>
+          </Link>
         </li>
       )),
-    [linksNames, locale],
+    [linksNames, locale, pathname],
   );
 
   return (
-    <nav>
-      <ul>{links}</ul>
+    <nav className="flex items-center">
+      <ul className="flex items-center gap-6">{links}</ul>
     </nav>
   );
 };

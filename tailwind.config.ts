@@ -6,8 +6,19 @@ const config: Config = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  darkMode: 'class',
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        inter: ['var(--font-inter)'],
+        pacifico: ['var(--font-pacifico)'],
+        poppins: ['var(--font-poppins)'],
+      },
+      container: {
+        center: true,
+        padding: '1rem',
+      },
+    },
   },
   plugins: [],
 };

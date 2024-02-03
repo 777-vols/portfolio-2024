@@ -50,8 +50,10 @@ module.exports = {
     'import/prefer-default-export': 0,
     'jsx-a11y/control-has-associated-label': 0,
     'react/jsx-props-no-spreading': 0,
+    '@typescript-eslint/ban-ts-comment': 0,
     'no-param-reassign': 0,
     'no-bitwise': 0,
+    'jsx-a11y/label-has-associated-control': 'off',
     '@typescript-eslint/no-misused-promises': [
       'error',
       {

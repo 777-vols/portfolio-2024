@@ -1,13 +1,11 @@
 import './globals.css';
 
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import { Suspense } from 'react';
 
-import LayoutNavbar from './_components/LayoutNavbar';
-import Loading from './loading';
+import { pacifico, poppins } from '@/constants/fonts';
 
-const inter = Inter({ subsets: ['latin'] });
+import Loading from './loading';
 
 export const metadata: Metadata = {
   title: 'Portfolio',
@@ -27,8 +25,7 @@ export default function RootLayout({
 } & ILocaleParams) {
   return (
     <html lang={locale}>
-      <body className={inter.className}>
-        <LayoutNavbar locale={locale} />
+      <body className={`${pacifico.variable} ${poppins.variable} bg-slate-200 dark:bg-black`}>
         <Suspense fallback={<Loading />}>{children}</Suspense>
       </body>
     </html>

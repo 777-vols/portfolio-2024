@@ -1,9 +1,9 @@
 {
   "navbar": {
-    "title": "Portfolio",
+    "title": "Programmer's Palette",
     "linksNames": {
       "home": "Home",
-      "about": "About me",
+      "about": "About",
       "projects": "Projects",
       "contacts": "Contacts"
     }
