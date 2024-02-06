@@ -49,7 +49,6 @@ export class WaterTexture {
   }
 
   private clear(): void {
-    this.ctx.fillStyle = 'black';
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
   }
 
@@ -136,7 +135,6 @@ export class WaterTexture {
     ctx.shadowColor = `rgba(${color},${0.7 * intensity})`;
 
     this.ctx.beginPath();
-    this.ctx.fillStyle = 'rgba(255,0,0,1)';
 
     this.ctx.arc(pos.x - offset, pos.y - offset, radius, 0, Math.PI * 2);
     this.ctx.fill();

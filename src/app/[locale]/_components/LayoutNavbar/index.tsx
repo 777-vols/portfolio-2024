@@ -17,6 +17,7 @@ const LayoutNavbar = ({ locale }: ILocaleProps) => {
   const [, currentLanguage, ...restUrl] = pathname.split('/');
 
   const [mode, setThemeMode] = useThemeSwitcher();
+
   const router = useRouter();
 
   const handleChangeLanguage = () => {
@@ -33,9 +34,9 @@ const LayoutNavbar = ({ locale }: ILocaleProps) => {
 
   return (
     <header
-      className="bg-black bg-opacity-60 h-20 flex items-center fixed z-20 w-full
+      className="bg-slate-500 bg-opacity-50 h-20 flex items-center fixed z-20 w-full
     after:absolute after:top-0 after:left-0 after:w-full after:h-full after:bg-gradient-to-r from-transparent via-slate-400 to-transparent after:transform after:-translate-x-full after:-z-10 transition ease-in-out after:duration-500
-    hover:after:left-[200%]">
+    hover:after:left-[200%] dark:bg-indigo-900 dark:bg-opacity-50">
       <div className="container flex justify-between w-full">
         <NavMenu locale={locale} />
 
@@ -52,7 +53,7 @@ const LayoutNavbar = ({ locale }: ILocaleProps) => {
           ))}
 
           <label htmlFor="switcher" className="ml-2 flex justify-center cursor-pointer">
-            <div className="relative flex justify-between w-[80px] h-[24px]">
+            <div className="relative flex justify-between w-[80px] h-[24px] rounded-full border-stone-50 border-2 border-solid">
               <input
                 id="switcher"
                 onChange={handleChangeLanguage}
@@ -60,13 +61,13 @@ const LayoutNavbar = ({ locale }: ILocaleProps) => {
                 type="checkbox"
                 className="hidden peer"
               />
-              <span className="text-center font-medium flex-grow relative z-20 self-center transition text-white peer-checked:text-blue-800">
+              <span className="text-center font-bold flex-grow relative z-20 self-center leading-6 transition text-white peer-checked:text-blue-500 peer-checked:font-bold">
                 en
               </span>
-              <span className="text-center font-medium flex-grow relative z-20 self-center transition text-blue-800 peer-checked:text-white">
+              <span className="text-center font-bold flex-grow relative z-20 self-center leading-6 transition text-blue-500 peer-checked:text-white peer-checked:font-bold">
                 ru
               </span>
-              <span className="absolute toggle z-10 bg-blue-800 h-[24px] w-[40px] rounded-full transition-all top-0 left-0 peer-checked:left-[calc(100%-40px)]" />
+              <span className="absolute toggle z-10 bg-blue-600 h-[21px] w-[40px] rounded-full transition-all top-0 left-0 peer-checked:left-[calc(100%-40px)]" />
             </div>
           </label>
 

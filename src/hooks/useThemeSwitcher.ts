@@ -1,48 +1,49 @@
 import { useCallback, useEffect, useState } from 'react';
 
 export const useThemeSwitcher = (): [string, (modeValue: 'dark' | 'light') => void] => {
-  const preferDarkQuery = '(prefer-color-scheme: dark)';
-
   const [mode, setMode] = useState('');
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia(preferDarkQuery);
-
     const currentMode = window.localStorage.getItem('themeMode');
 
-    const handleChangeMode = () => {
-      if (currentMode) {
-        const currentModeValue = currentMode === 'dark' ? 'dark' : 'light';
-        setMode(currentModeValue);
+    const canvas = document.querySelector('canvas')!;
+    const ctx = canvas.getContext('2d')!;
 
-        if (currentModeValue === 'dark') {
-          document.documentElement.classList.add('dark');
-        } else {
-          document.documentElement.classList.remove('dark');
-        }
-      } else {
-        const currentModeValue = mediaQuery.matches ? 'dark' : 'light';
-        setMode(currentModeValue);
-
-        if (currentModeValue === 'dark') {
-          document.documentElement.classList.add('dark');
-        } else {
-          document.documentElement.classList.remove('dark');
-        }
-      }
-    };
-
-    mediaQuery.addEventListener('change', handleChangeMode);
+    if (currentMode === 'dark') {
+      window.localStorage.setItem('themeMode', 'dark');
+      document.documentElement.classList.add('dark');
+      ctx.fillStyle = 'black';
+      setMode('dark');
+    } else if (currentMode === 'light') {
+      window.localStorage.setItem('themeMode', 'light');
+      document.documentElement.classList.remove('dark');
+      ctx.fillStyle = 'rgb(203 213 225)';
+      setMode('light');
+    }
   }, []);
 
   useEffect(() => {
+    const canvas = document.querySelector('canvas')!;
+    const ctx = canvas.getContext('2d')!;
+
+    if (!window.localStorage.getItem('themeMode')) {
+      window.localStorage.setItem('themeMode', 'dark');
+      document.documentElement.classList.add('dark');
+      ctx.fillStyle = 'black';
+      setMode('dark');
+    }
+
     if (mode === 'dark') {
       window.localStorage.setItem('themeMode', 'dark');
       document.documentElement.classList.add('dark');
-    } else {
+      ctx.fillStyle = 'black';
+    } else if (mode === 'light') {
       window.localStorage.setItem('themeMode', 'light');
       document.documentElement.classList.remove('dark');
+      ctx.fillStyle = 'rgb(203 213 225)';
     }
+
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
   }, [mode]);
 
   const handleSetMode = useCallback((modeValue: 'dark' | 'light') => {

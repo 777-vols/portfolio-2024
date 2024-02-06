@@ -25,7 +25,7 @@ export default function RootLayout({
 } & ILocaleParams) {
   return (
     <html lang={locale}>
-      <body className={`${pacifico.variable} ${poppins.variable} bg-slate-200 dark:bg-black`}>
+      <body className={`${pacifico.variable} ${poppins.variable}`}>
         <Suspense fallback={<Loading />}>{children}</Suspense>
       </body>
     </html>
