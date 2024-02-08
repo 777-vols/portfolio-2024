@@ -1,12 +1,13 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
+import { useRef, useState } from 'react';
 
 import NavMenu from '@/components/UI/NavMenu';
 import { themeIcons } from '@/constants';
-import { useThemeSwitcher } from '@/hooks';
+import { useOnClickOutside, useThemeSwitcher, useWindowSize } from '@/hooks';
 import { i18n } from '@/i18n/i18n.config';
 import { ILocaleProps } from '@/types';
 
@@ -16,9 +17,24 @@ const LayoutNavbar = ({ locale }: ILocaleProps) => {
   const pathname = usePathname();
   const [, currentLanguage, ...restUrl] = pathname.split('/');
 
+  const menuRef = useRef(null);
+
   const [mode, setThemeMode] = useThemeSwitcher();
 
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+
   const router = useRouter();
+
+  const windowSize = useWindowSize();
+  const isMobile = windowSize.width! < 768;
+
+  const handleCloseOpenMobileMenu = () => {
+    setIsMenuOpen((prevState) => !prevState);
+  };
+
+  useOnClickOutside(menuRef, () => {
+    if (isMenuOpen) setIsMenuOpen(false);
+  });
 
   const handleChangeLanguage = () => {
     router.push(
@@ -34,33 +50,59 @@ const LayoutNavbar = ({ locale }: ILocaleProps) => {
 
   return (
     <header
-      className="bg-slate-500 bg-opacity-50 h-20 flex items-center fixed z-20 w-full px-7
-    after:absolute after:top-0 after:left-0 after:w-full after:h-full after:bg-gradient-to-r from-transparent via-slate-400 to-transparent after:transform after:-translate-x-full after:-z-10 transition ease-in-out after:duration-500
-    hover:after:left-[200%] dark:bg-indigo-900 dark:bg-opacity-50">
+      ref={menuRef}
+      className="bg-slate-700 bg-opacity-50 h-20 flex items-center fixed z-20 w-full px-7
+    after:absolute after:top-0 after:left-0 after:w-full after:h-full after:bg-gradient-to-r from-transparent via-blue-950 dark:via-violet-400 to-transparent after:transform after:-translate-x-full after:-z-10 transition ease-in-out after:duration-500
+    hover:after:left-[100%] dark:bg-indigo-950 dark:bg-opacity-50 max-md:relative">
       <div className="container flex justify-between w-full">
-        <button type="button" className="relative group md:hidden">
-          <div className="relative flex flex-col overflow-hidden items-center justify-center rounded-full w-[40px] h-[40px] transform transition-all ring-0 ring-blue-950 dark:ring-white dark:ring-opacity-50 hover:ring-8 group-focus:ring-4 ring-opacity-50 duration-200 shadow-lg">
-            <div className="transform transition-all duration-150 overflow-hidden -translate-y-5 group-focus:translate-y-3">
+        <button
+          onClick={handleCloseOpenMobileMenu}
+          type="button"
+          className="relative group md:hidden">
+          <div className="relative flex flex-col overflow-hidden items-center justify-center rounded-full w-[40px] h-[40px] transform transition-all ring-0 ring-blue-800 dark:ring-white dark:ring-opacity-50 hover:ring-8 group-focus:ring-4 ring-opacity-50 duration-200 shadow-lg shadow-blue-200">
+            <div
+              className={`transform transition-all duration-150 overflow-hidden ${
+                isMenuOpen ? 'translate-y-3' : '-translate-y-5'
+              }`}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-8 w-9 animate-bounce text-blue-950 dark:text-white"
+                className="h-[34px] w-9 animate-bounce text-white"
                 fill="none"
                 viewBox="0 0 26 28"
                 stroke="currentColor"
-                stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
+                strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
               </svg>
             </div>
 
-            <div className="flex flex-col justify-between w-[23px] h-[23px] transform transition-all duration-300 origin-center overflow-hidden -translate-y-3">
-              <div className="bg-blue-950 dark:bg-white mb-[5px] h-[3px] w-full rounded transform transition-all duration-300 origin-left group-focus:translate-y-6" />
-              <div className="bg-blue-950 dark:bg-white mb-[5px] h-[3px] w-full rounded transform transition-all duration-300 group-focus:translate-y-6 delay-75" />
-              <div className="bg-blue-950 dark:bg-white h-[3px] w-full rounded transform transition-all duration-300 origin-left group-focus:translate-y-6 delay-100" />
+            <div
+              className={`flex flex-col justify-between w-[23px] h-[25px] transform transition-all duration-300 origin-center overflow-hidden ${
+                isMenuOpen ? '' : '-translate-y-3'
+              }`}>
+              <div
+                className={`bg-white mb-[5px] h-[3px] w-full rounded transform transition-all duration-300 origin-left ${
+                  isMenuOpen ? 'translate-y-6' : ''
+                }`}
+              />
+              <div
+                className={`bg-white mb-[5px] h-[3px] w-full rounded transform transition-all duration-300 ${
+                  isMenuOpen ? 'translate-y-6' : ''
+                } delay-75`}
+              />
+              <div
+                className={`bg-white h-[3px] w-full rounded transform transition-all duration-300 origin-left ${
+                  isMenuOpen ? 'translate-y-6' : ''
+                } delay-100`}
+              />
             </div>
           </div>
         </button>
 
-        <NavMenu locale={locale} />
+        {isMobile ? (
+          <AnimatePresence>{isMenuOpen && <NavMenu locale={locale} />}</AnimatePresence>
+        ) : (
+          <NavMenu locale={locale} />
+        )}
 
         <div className="flex gap-5 items-center">
           <label htmlFor="switcher" className="ml-2 flex justify-center cursor-pointer">
@@ -83,7 +125,7 @@ const LayoutNavbar = ({ locale }: ILocaleProps) => {
           </label>
 
           <motion.button
-            className="rounded-full p-0.5 filter: invert sepia saturate-100 hue-rotate-77 brightness-128 contrast-120 w-[30px] h-[30px]"
+            className="rounded-full p-0.5 filter: invert sepia saturate-100 hue-rotate-77 brightness-128 contrast-120 w-[30px] h-[30px] shadow-xl shadow-blue-800 dark:shadow-yellow-500"
             onClick={handleChangeThemeMode}
             whileHover={{ y: -2 }}
             whileTap={{ scale: 0.9 }}>

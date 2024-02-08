@@ -17,7 +17,7 @@ export const useThemeSwitcher = (): [string, (modeValue: 'dark' | 'light') => vo
     } else if (currentMode === 'light') {
       window.localStorage.setItem('themeMode', 'light');
       document.documentElement.classList.remove('dark');
-      ctx.fillStyle = 'rgb(203 213 225)';
+      ctx.fillStyle = 'rgb(226 232 240)';
       setMode('light');
     }
   }, []);
